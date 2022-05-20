@@ -1,5 +1,5 @@
 # CPSC455
-##Project Description
+## Project Description
 ----------------------
 
 Name:
@@ -7,17 +7,24 @@ Name:
 Consumer:
 
 Function:
+
 Data:
+
 Data Usage:
+
 Bonus:
 
-Project Requirements
+
+## Project Requirements
 ----------------------
 Minimal:
+
 Standard:
+
 Advanced:
 
-Requirement tasks breakdown
+
+## Requirement tasks breakdown
 ----------------------
 
 
