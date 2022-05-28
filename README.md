@@ -45,6 +45,9 @@ a. Create rating function in react
 b. Send and store data in MongoDB
 c. Setup endpoints to retrieve rating information
 
+## Rough sketch prototypes
+--------------------
 
+![image](https://user-images.githubusercontent.com/75821052/170809088-11391a98-88d1-4d6f-992d-c6f16537c108.png)
 
 
