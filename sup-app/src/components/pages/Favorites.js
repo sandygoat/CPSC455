@@ -1,6 +1,9 @@
+import GridDesign from "./GridDesign";
+import "./GridDesign.css";
+
 function Favorites() {
     return (
-        <div>this is a favorite page</div>
+        <GridDesign/>
     );
 }
 
