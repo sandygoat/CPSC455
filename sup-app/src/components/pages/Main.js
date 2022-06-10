@@ -1,6 +1,8 @@
+import GMap from "../map/GMap";
+
 function Main() {
     return (
-        <div>this is a Main page</div>
+        <GMap/>
     );
 }
 
