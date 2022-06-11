@@ -2,7 +2,10 @@ import GMap from "../map/GMap";
 
 function Main() {
     return (
-        <GMap/>
+        <div>
+            <GMap/>
+        </div>
+
     );
 }
 

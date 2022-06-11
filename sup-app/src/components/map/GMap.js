@@ -3,28 +3,22 @@ import {Autocomplete} from "@react-google-maps/api";
 import MapStyles from "./MapStyles";
 
 const center = {
-    lat: 49.2827,
-    lng: -123.1207,
-};
-
-const mapContainerStyle = {
-    width: "100vw",
-    height: "90vh",
-    top: "10vh",
+    lat: 49.260969294737095,
+    lng: -123.24598937411244,
 };
 
 
 function GMap() {
     return (
-        <div>
+        <div style={{ height: '100vh', width: '50%', float: 'right' }}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
                 defaultCenter={center}
                 center={center}
-                mapContainerStyle={mapContainerStyle}
-                defaultZoom={14}
+                defaultZoom={14.2}
                 options={{ disableDefaultUI: true, zoomControl: true, styles: MapStyles }}
             />
+
         </div>
     )
 }
