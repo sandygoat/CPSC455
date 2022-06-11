@@ -1,20 +1,21 @@
-import './App.css';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import Layout from "./components/ui/Layout";
-import Main from "./components/pages/Main";
+import 'antd/dist/antd.min.css'
+import HomeLayout from "./components/ui/HomeLayout";
+import Home from "./components/pages/Home";
 import Favorites from "./components/pages/Favorites";
 import UserPage from "./components/pages/UserPage";
 
+
 function App() {
-  return (
+  return (  
     <Router>
-      <Layout>
+      <HomeLayout>
           <Routes>
-              <Route path="/" exact element={<Main/>}/>
-              <Route path="/favorites" exact element={<Favorites/>}/>
+              <Route path="/" exact element={<Home/>}/>
+              <Route path="/favorite" exact element={<Favorites/>}/>
               <Route path="/profile" exact element={<UserPage/>}/>
           </Routes>
-      </Layout>
+      </HomeLayout>
     </Router>
   );
 }
