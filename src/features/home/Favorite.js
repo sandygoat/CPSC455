@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import YourFavourites from './YourFavourites';
-import GridDesign from "../FavoriteUI/GridDesign";
+import GridDesign from "./FavoriteUI/GridDesign";
 // import PropTypes from 'prop-types';
 
 export default function Favorite() {

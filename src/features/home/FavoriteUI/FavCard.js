@@ -18,9 +18,10 @@ const FavCard = () => (
             width: 240,
         }}
         // cover={<img alt="example" src="https://i.imgur.com/SQIhRdB.png" />}
-        cover={<img alt="example" src="https://i.imgur.com/61ibiF7.jpg" />}
+        // cover={<img alt="example" src="https://i.imgur.com/61ibiF7.jpg" />}
+          cover={<img alt="example" src="https://i.imgur.com/7l2GRbK.jpeg" />}
     >
-        <Meta title="Yo Yo Cat" description="www.instagram.com" />
+        <Meta title="Yo Yo Dog" description="www.instagram.com" />
         <br/>
         <StarRating/>
         <br/>
