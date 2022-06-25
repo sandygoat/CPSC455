@@ -6,9 +6,9 @@ module.exports = {
       res.redirect('/users/login');
     },
     forwardAuthenticated: function(req, res, next) {
-      if (!req.isAuthenticated()) {
+      if (req.isAuthenticated()) {
         return next();
       }
-      res.redirect('/home');      
+      res.status(404).send(JSON.stringify('user not login'))    
     }
   };

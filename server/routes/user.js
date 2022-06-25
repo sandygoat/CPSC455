@@ -57,7 +57,7 @@ const { forwardAuthenticated } = require('../config/auth');
 // router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 
 // Register
-router.post('/register',forwardAuthenticated, (req, res) => {
+router.post('/register', (req, res) => {
   const { name, email, password} = req.body;
   let errors = [];
 
@@ -100,7 +100,7 @@ router.post('/register',forwardAuthenticated, (req, res) => {
 });
 
 // Login
-router.post('/login', forwardAuthenticated, (req, res, next) => {
+router.post('/login' , (req, res, next) => {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
     if (!user) { return res.status(400).send({message: err});; }

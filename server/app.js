@@ -22,8 +22,8 @@ var app = express();
 var corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
-  maxAge: '1728000'
-  //这一项是为了跨域专门设置的
+  allowMethods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS','HEAD'],
+  allowHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
 }
 app.use(cors(corsOptions))
 
@@ -72,7 +72,6 @@ app.use(
       cookie: {
         secure: false, // if true only transmit cookie over https
         httpOnly: false, // if true prevent client side JS from reading the cookie 
-        maxAge: 1000 * 60 * 10 // session max age in miliseconds
     }
     })
   );
