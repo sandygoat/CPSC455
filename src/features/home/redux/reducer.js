@@ -1,8 +1,12 @@
 import initialState from './initialState';
 import { reducer as registrationReducer } from './registration';
+import { reducer as loginReducer } from './login';
+import { reducer as getPlacesReducer } from './getPlaces';
 
 const reducers = [
   registrationReducer,
+  loginReducer,
+  getPlacesReducer,
 ];
 
 export default function reducer(state = initialState, action) {

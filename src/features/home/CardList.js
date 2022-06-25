@@ -1,8 +1,11 @@
 import React from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import Badge from './Badge';
 import Card from './Card';
 import websites from './websites';
+import {useSelector} from 'react-redux';
+import {useGetPlaces} from './redux/hooks';
 
 const Page = styled.div`
   display: flex;
@@ -43,10 +46,26 @@ const Grid = styled.div`
 `;
 
 export default function CardList() {
+  const {getPlaces} = useGetPlaces();
+  const { places } = useSelector(
+    state => ({
+      places: state.home.places,
+    })
+  );
+
+  // const uGetPlaces = useCallback(() => {
+  //     getPlaces();
+  // }, [getPlaces])
+ 
+useEffect(() => {
+  getPlaces()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+},[])
+
   return (
     <Page>
       <Grid>
-        {websites.map((website, index) => (
+        {places && places.map((website, index) => (
           <Card
             key={website.description}
             hexa={website.hexa}

@@ -50,7 +50,9 @@ export default function Register(){
 
     const onFinish = (values) => {
       registration.registration({
-        ...values
+        email:values.email,
+        password: values.password,
+        name: values.username,
       })
     };
 

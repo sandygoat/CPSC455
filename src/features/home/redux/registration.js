@@ -8,38 +8,61 @@ import {
 } from './constants';
 
 export function registration(userCredentials) {
-  console.log("reg")
-            
-  return dispatch => { // optionally you can have getState as the second argument
+  const { email, password, name } = userCredentials;
+
+  return dispatch => {
+    // optionally you can have getState as the second argument
     dispatch({
       type: HOME_REGISTRATION_BEGIN,
     });
 
-    return new Promise((resolve, reject) => {
-      // const doRequest = args.error ? Promise.reject(new Error()) : Promise.resolve();
-      // doRequest.then(
-      //   (res) => {
-      //     dispatch({
-      //       type: HOME_REGISTRATION_SUCCESS,
-      //       data: res,
-      //     });
-      //     resolve(res);
-      //   },
-      //   // Use rejectHandler as the second argument so that render errors won't be caught.
-      //   (err) => {
-      //     dispatch({
-      //       type: HOME_REGISTRATION_FAILURE,
-      //       data: { error: err },
-      //     });
-      //     reject(err);
-      //   },
-      // );
-          dispatch({
-            type: HOME_REGISTRATION_SUCCESS,
-            data: userCredentials.username,
-          });
-          return 1;
-    });
+    return fetch('http://localhost:3100/users/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'credentials': "same-origin",
+      },
+      body: JSON.stringify(userCredentials),
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then(res => {
+        dispatch({
+          type: HOME_REGISTRATION_SUCCESS,
+          data: res,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: HOME_REGISTRATION_FAILURE,
+          data: { error: err },
+        });
+      });
+    // const doRequest = args.error ? Promise.reject(new Error()) : Promise.resolve();
+    // doRequest.then(
+    //   (res) => {
+    //     dispatch({
+    //       type: HOME_REGISTRATION_SUCCESS,
+    //       data: res,
+    //     });
+    //     resolve(res);
+    //   },
+    //   // Use rejectHandler as the second argument so that render errors won't be caught.
+    //   (err) => {
+    //     dispatch({
+    //       type: HOME_REGISTRATION_FAILURE,
+    //       data: { error: err },
+    //     });
+    //     reject(err);
+    //   },
+    // );
+    // dispatch({
+    //   type: HOME_REGISTRATION_SUCCESS,
+    //   data: userCredentials.username,
+    // });
   };
 }
 
@@ -58,12 +81,15 @@ export function useRegistration() {
       registrationPending: state.home.registrationPending,
       registrationError: state.home.registrationError,
     }),
-    shallowEqual,
+    shallowEqual
   );
 
-  const boundAction = useCallback((...args) => {
-    return dispatch(registration(...args));
-  }, [dispatch]);
+  const boundAction = useCallback(
+    (...args) => {
+      return dispatch(registration(...args));
+    },
+    [dispatch]
+  );
 
   const boundDismissError = useCallback(() => {
     return dispatch(dismissRegistrationError());
@@ -94,7 +120,7 @@ export function reducer(state, action) {
         ...state,
         registrationPending: false,
         registrationError: null,
-        authorizedUser: {username: action.data},
+        authorizedUser: action.data,
       };
 
     case HOME_REGISTRATION_FAILURE:

@@ -2,16 +2,18 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { hot, setConfig } from 'react-hot-loader';
 import store from './common/store';
 import routeConfig from './common/routeConfig';
 import history from './common/history';
 
+
 setConfig({
   logLevel: 'debug',
 });
+
 
 function renderRouteConfigV3(routes, contextPath) {
   // Resolve route config object in React Router v3.
@@ -30,7 +32,7 @@ function renderRouteConfigV3(routes, contextPath) {
       children.push(
         <Route
           key={newContextPath}
-          render={props => <item.component {...props}>{childRoutes}</item.component>}
+          render={(props)=><item.component {...props}>{childRoutes}</item.component>}
           path={newContextPath}
         />,
       );

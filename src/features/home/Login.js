@@ -2,17 +2,33 @@ import React, { useEffect, useState } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import Register from './Register';
+import {useLogin} from './redux/hooks';
+import {useSelector} from 'react-redux';
+import {Redirect } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 // import {} from './redux/hooks';
 
 export default function Login() {
-    const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+  const { authorizedUser } = useSelector(
+    state => ({
+      authorizedUser: state.home.authorizedUser,
+    })
+  );
+  const {login} = useLogin();
+  const onFinish = (values) => {
+    login({
+        email:values.email,
+        password:values.password,
+      })
   };
+
+  const submit = (values) =>{
+      
+  }
 
 
   return (
-    window.location.pathname == "/reg"?<Register/>:
+    authorizedUser? <Redirect to="/home"/>:
     <div className='log-in-card'>
       <h2>Log In</h2>
       <Form
@@ -24,15 +40,15 @@ export default function Login() {
         onFinish={onFinish}
       >
         <Form.Item
-          name="username"
+          name="email"
           rules={[
             {
               required: true,
-              message: 'Please input your Username!',
+              message: 'Please input your email!',
             },
           ]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
         </Form.Item>
         <Form.Item
           name="password"
@@ -60,7 +76,7 @@ export default function Login() {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button type="primary" htmlType="submit" className="login-form-button" onClick={submit}>
             Log in
           </Button>
           Or <a href="/reg">register now!</a>
