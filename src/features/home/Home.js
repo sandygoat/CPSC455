@@ -8,12 +8,12 @@ import {useSelector} from 'react-redux';
 import {Redirect } from 'react-router-dom';
 
 export default function Home() {
-  
-    const { authorizedUser } = useSelector(
+  const { authorizedUser } = useSelector(
     state => ({
       authorizedUser: state.home.authorizedUser,
     })
   );
+  
   return (!authorizedUser?<Redirect to="/login"/>:
     <div className="home-home">    
         <Map/>

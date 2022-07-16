@@ -13,6 +13,7 @@ const connectRedis = require('connect-redis');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
 var placesRouter = require('./routes/places');
+var reviewsRouter = require('./routes/reviews');
 const config = require('./config/config.js');
 var cors = require('cors')
 
@@ -78,7 +79,9 @@ app.use(
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/reviews', reviewsRouter);
 app.use('/places', placesRouter);
+
 
 mongoose
 .connect(

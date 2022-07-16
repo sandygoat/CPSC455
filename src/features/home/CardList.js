@@ -46,32 +46,40 @@ const Grid = styled.div`
 `;
 
 export default function CardList() {
-  const {getPlaces} = useGetPlaces();
+  // const {getPlaces} = useGetPlaces();
   const { places } = useSelector(
     state => ({
       places: state.home.places,
     })
   );
 
+
   // const uGetPlaces = useCallback(() => {
   //     getPlaces();
   // }, [getPlaces])
  
-useEffect(() => {
-  getPlaces()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-},[])
-
+// useEffect(() => {
+//   getPlaces()
+//   // eslint-disable-next-line react-hooks/exhaustive-deps
+// },[])
+function color16(){
+   let r = Math.floor(Math.random()*256);
+   let g = Math.floor(Math.random()*256);
+   let b = Math.floor(Math.random()*256);
+   let color = '#'+r.toString(16)+g.toString(16)+b.toString(16);
+   return color;
+}
   return (
     <Page>
       <Grid>
-        {places && places.map((website, index) => (
+        {places && places.slice(1,7).map((place, index) => (
           <Card
-            key={website.description}
-            hexa={website.hexa}
-            title={website.title}
-            description={website.description}
-            image={website.image}
+            key={place.place_id}
+            id={place.place_id}
+            hexa={color16()}
+            title={place.name}
+            description={place.vicinity}
+            image={place.photos && place.photos[0] && place.photos[0].html_attributions[0].split("\"")[1]}
           />
         ))}
       </Grid>

@@ -1,25 +1,24 @@
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import {
-  HOME_LOGIN_BEGIN,
-  HOME_LOGIN_SUCCESS,
-  HOME_LOGIN_FAILURE,
-  HOME_LOGIN_DISMISS_ERROR,
+  HOME_GET_REVIEWS_BEGIN,
+  HOME_GET_REVIEWS_SUCCESS,
+  HOME_GET_REVIEWS_FAILURE,
+  HOME_GET_REVIEWS_DISMISS_ERROR,
 } from './constants';
 
-export function login(userCredentials) {
+export function getReviews(id) {
   return (dispatch) => { // optionally you can have getState as the second argument
     dispatch({
-      type: HOME_LOGIN_BEGIN,
+      type: HOME_GET_REVIEWS_BEGIN,
     });
 
-    return fetch('http://localhost:3100/users/login', {
-      method: 'POST',
+    return fetch(`http://localhost:3100/reviews?placeId=${id}`, {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
       credentials: "include",
-      body: JSON.stringify(userCredentials),
     })
       .then(res => {
         if (res.ok) {
@@ -29,86 +28,84 @@ export function login(userCredentials) {
       })
       .then(res => {
         dispatch({
-            type: HOME_LOGIN_SUCCESS,
+            type: HOME_GET_REVIEWS_SUCCESS,
             data: res,
           });
       })
       .catch(err => {
         dispatch({
-            type: HOME_LOGIN_FAILURE,
+            type: HOME_GET_REVIEWS_FAILURE,
             data: { error: err },
           });
       });
-
   };
 }
 
-export function dismissLoginError() {
+export function dismissGetReviewsError() {
   return {
-    type: HOME_LOGIN_DISMISS_ERROR,
+    type: HOME_GET_REVIEWS_DISMISS_ERROR,
   };
 }
 
-export function useLogin() {
+export function useGetReviews() {
   const dispatch = useDispatch();
 
-  const { loginPending, loginError } = useSelector(
+  const { getReviewsPending, getReviewsError } = useSelector(
     state => ({
-      loginPending: state.home.loginPending,
-      loginError: state.home.loginError,
+      getReviewsPending: state.home.getReviewsPending,
+      getReviewsError: state.home.getReviewsError,
     }),
     shallowEqual,
   );
 
   const boundAction = useCallback((...args) => {
-    return dispatch(login(...args));
+    return dispatch(getReviews(...args));
   }, [dispatch]);
 
   const boundDismissError = useCallback(() => {
-    return dispatch(dismissLoginError());
+    return dispatch(dismissGetReviewsError());
   }, [dispatch]);
 
   return {
-    login: boundAction,
-    loginPending,
-    loginError,
-    dismissLoginError: boundDismissError,
+    getReviews: boundAction,
+    getReviewsPending,
+    getReviewsError,
+    dismissGetReviewsError: boundDismissError,
   };
 }
 
 export function reducer(state, action) {
   switch (action.type) {
-    case HOME_LOGIN_BEGIN:
+    case HOME_GET_REVIEWS_BEGIN:
       // Just after a request is sent
       return {
         ...state,
-        loginPending: true,
-        loginError: null,
+        getReviewsPending: true,
+        getReviewsError: null,
       };
 
-    case HOME_LOGIN_SUCCESS:
+    case HOME_GET_REVIEWS_SUCCESS:
       // The request is success
-      localStorage.setItem('authorizedUser',action.data);
       return {
         ...state,
-        loginPending: false,
-        loginError: null,
-        authorizedUser: action.data,
+        getReviewsPending: false,
+        getReviewsError: null,
+        curReviews: action.data,
       };
 
-    case HOME_LOGIN_FAILURE:
+    case HOME_GET_REVIEWS_FAILURE:
       // The request is failed
       return {
         ...state,
-        loginPending: false,
-        loginError: action.data.error,
+        getReviewsPending: false,
+        getReviewsError: action.data.error,
       };
 
-    case HOME_LOGIN_DISMISS_ERROR:
+    case HOME_GET_REVIEWS_DISMISS_ERROR:
       // Dismiss the request failure error
       return {
         ...state,
-        loginError: null,
+        getReviewsError: null,
       };
 
     default:

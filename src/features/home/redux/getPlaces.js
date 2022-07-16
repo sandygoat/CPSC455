@@ -7,35 +7,40 @@ import {
   HOME_GET_PLACES_DISMISS_ERROR,
 } from './constants';
 
-export function getPlaces(args = {}) {
-  return (dispatch) => { // optionally you can have getState as the second argument
+export function getPlaces({ lat, lng, type}) {
+  return dispatch => {
+    // optionally you can have getState as the second argument
     dispatch({
       type: HOME_GET_PLACES_BEGIN,
     });
 
-    return fetch('http://localhost:3100/places', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'credentials': "same-origin",
-      },
-    })
-      .then(res => {
+    return fetch(
+      `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&type=park,school,campground&radius=2000&key=AIzaSyA1h-RJmy66EAvQmxOOExargkvrdDRLlH4`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Headers': 'X-Requested-With',
+        },
+      }
+    )
+    .then(res => {
         if (res.ok) {
           return res.json();
         }
+        throw new Error(res.status);
       })
       .then(res => {
         dispatch({
-            type: HOME_GET_PLACES_SUCCESS,
-            data: res,
-          });
+          type: HOME_GET_PLACES_SUCCESS,
+          data: res.results,
+        });
       })
       .catch(err => {
         dispatch({
-            type: HOME_GET_PLACES_FAILURE,
-            data: { error: err },
-          });
+          type: HOME_GET_PLACES_FAILURE,
+          data: { error: err },
+        });
       });
   };
 }
@@ -54,12 +59,15 @@ export function useGetPlaces() {
       getPlacesPending: state.home.getPlacesPending,
       getPlacesError: state.home.getPlacesError,
     }),
-    shallowEqual,
+    shallowEqual
   );
 
-  const boundAction = useCallback((...args) => {
-    return dispatch(getPlaces(...args));
-  }, [dispatch]);
+  const boundAction = useCallback(
+    (...args) => {
+      return dispatch(getPlaces(...args));
+    },
+    [dispatch]
+  );
 
   const boundDismissError = useCallback(() => {
     return dispatch(dismissGetPlacesError());

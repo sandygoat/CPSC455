@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, message } from 'antd';
 import Register from './Register';
 import {useLogin} from './redux/hooks';
 import {useSelector} from 'react-redux';
@@ -14,7 +14,8 @@ export default function Login() {
       authorizedUser: state.home.authorizedUser,
     })
   );
-  const {login} = useLogin();
+  const {login, loginError} = useLogin();
+  
   const onFinish = (values) => {
     login({
         email:values.email,
@@ -25,6 +26,12 @@ export default function Login() {
   const submit = (values) =>{
       
   }
+
+  useEffect(()=>{
+    if(loginError){
+      message.error("Failed to login");
+    }
+  },[loginError])
 
 
   return (

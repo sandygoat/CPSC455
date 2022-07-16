@@ -28,6 +28,7 @@ export function registration(userCredentials) {
         if (res.ok) {
           return res.json();
         }
+        throw new Error(res.status);
       })
       .then(res => {
         dispatch({

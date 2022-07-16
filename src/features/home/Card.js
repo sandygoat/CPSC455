@@ -1,5 +1,8 @@
-import React from 'react';
+
 import styled from 'styled-components';
+import { Button, Modal } from 'antd';
+import React, { useState } from 'react';
+import Review from './Review';
 
 const cardWidth = 280;
 const borderRadius = 8;
@@ -108,15 +111,53 @@ const Style = styled.button`
   }
 `;
 
-const Card = ({ hexa, title, description, image }) => (
-  <Style>
-    <Screenshot image={image} />
-    <Content>
-      <Title>{title}</Title>
-      <Description>{description}</Description>
-      <BottomBar background={hexa} />
-    </Content>
-  </Style>
-);
+const Card = ({ id, hexa, title, description, image }) => {
+  const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [isClosed, setIsClosed] = useState(true);
+
+  const showModal = () => {
+    setVisible(true);
+    setIsClosed(false);
+  };
+
+  const handleOk = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setVisible(false);
+    }, 3000);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+    setIsClosed(true);
+  };
+
+  return (
+    <>
+      <Style onClick={showModal}>
+      <Screenshot image={image} />
+      <Content>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
+        <BottomBar background={hexa} />
+      </Content>
+    </Style>;
+      <>
+      {isClosed?null:<Modal
+        visible={visible}
+        title="Review"
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[]}
+      >
+        <Review id={id}></Review>
+      </Modal>}
+      </>
+    </>
+  );
+}
+  
 
 export default Card;

@@ -2,33 +2,6 @@ const express = require('express');
 const router = express.Router();
 const {forwardAuthenticated} = require('../config/auth');
 
-let places = [
-    {
-      "hexa": "#1D1148",
-      "title": "Jim Everett Memorial Park",
-      "description": "Dalhousie Rd Greater Vancouver A, BC Canada",
-      "image": "https://lh5.googleusercontent.com/p/AF1QipMGqq9XOv8pOSd9-6ADYUo15XIslMMl65bAJsrc=w408-h306-k-no"
-    },
-    {
-      "hexa": "#FFCD00",
-      "title": "Carolinian Forest Garden",
-      "description": "6804 SW Marine Drive Vancouver, BC V6T 1Z2 Canada",
-      "image": "https://lh5.googleusercontent.com/p/AF1QipNvrkqUyjEcNmu0rJaGR_kX2sn4XJoY424j3Xrz=w426-h240-k-no"
-    },
-    {
-      "hexa": "#FF5041",
-      "title": "UBC Botanical Garden",
-      "description": "6804 SW Marine Dr Vancouver, BC V6T 1Z4 Canada",
-      "image": "https://lh5.googleusercontent.com/p/AF1QipPrgUeA-Jy2k-OtA__KY9jplIYq7dEDHJVnRW5s=w408-h306-k-no"
-    },
-    {
-      "hexa": "#000000",
-      "title": "Food Garden",
-      "description": "6804 SW Marine Drive Vancouver, BC V6T 1Z2 Canada",
-      "image": "https://lh5.googleusercontent.com/p/AF1QipMXSwCBSspQGgU_vnFuqd5UAdWHFMPeFA9-c4k=w408-h306-k-no"
-    }
-  ]
-
 router.get('/', function (req, res, next) {
     return res.send(JSON.stringify(places));
 });

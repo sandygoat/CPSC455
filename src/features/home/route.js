@@ -6,6 +6,10 @@ export default {
   path: '/',
   childRoutes: [
     {
+            path: '/',
+      component: Home,
+    },
+    {
       path: '/home',
       component: Home,
     },

@@ -1,30 +1,233 @@
-import React, { useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
-import GoogleMapReact from "google-map-react";
-import MapStyles from '../../styles/map.js';
+// import React, { useEffect, useState } from 'react';
+// // import PropTypes from 'prop-types';
+// import GoogleMapReact from "google-map-react";
+// import MapStyles from '../../styles/map.js';
 
+// const center = {
+//     lat: 49.260969294737095,
+//     lng: -123.24598937411244,
+// };
+
+// export default function Map() {
+//   return (
+//     <div className="home-map">
+//       <div style={{ height: '50vh', width: '100%', float: 'right' }}>
+//             <GoogleMapReact
+//                 bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
+//                 defaultCenter={center}
+//                 center={center}
+//                 defaultZoom={14.2}
+//                 options={{ disableDefaultUI: true, zoomControl: true, styles: MapStyles }}
+//             />
+
+//         </div>
+//     </div>
+//   );
+// };
+
+// Map.propTypes = {};
+// Map.defaultProps = {};
+
+import React from 'react';
+import { Autocomplete, GoogleMap, InfoWindow, Marker, useJsApiLoader } from '@react-google-maps/api';
+import MapStyles from '../../styles/map.js';
+import classes from './Map.less';
+import { useCallback, useEffect, useState } from 'react';
+import { LikeOutlined, LikeFilled } from '@ant-design/icons';
+import { InputBase } from '@mui/material';
+// import SearchIcon from '@material-ui/icons/Search';
+// import NearMe from '@material-ui/icons/NearMe';
+// import { InputBase } from '@material-ui/core';
+// import "@reach/combobox/styles.css";
+import { Button } from 'antd';
+import { useSetPlaces } from './redux/hooks';
+
+const libraries = ["places"];
+const mapContainerStyle = {
+    height: '90vh', width: '100%', float: 'right'
+};
 const center = {
     lat: 49.260969294737095,
     lng: -123.24598937411244,
 };
 
-export default function Map() {
-  return (
-    <div className="home-map">
-      <div style={{ height: '50vh', width: '100%', float: 'right' }}>
-            <GoogleMapReact
-                bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
+export default function Map(callback, deps) {
+    const [placeCollection, setPlaces] = useState([]);
+    const [selected, setSelected] = useState(null);
+    const [autocomplete, setAutocomplete] = useState(null);
+    const { setPlace } = useSetPlaces();
+    const { isLoaded } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
+        libraries: libraries
+    })
+    const [nearbyPlaces, setNearbyPlaces] = useState([]);
+
+    const [map, setMap] = useState(null)
+
+    // To be replaced by useSelector
+
+    const onLoad = useCallback(function callback(map) {
+        map.setZoom(14.2);
+        setMap(map)
+    }, [])
+
+    const onUnmount = useCallback(function callback(map) {
+        setMap(null)
+    }, [])
+    function disLikeHandler() {
+        const id = selected.place_id;
+        // TODO: To be replaced by dispatch function DELETE_ONE
+        setPlaces(placeCollection.filter(place => place.place_id !== id));
+    }
+    function likeHandler() {
+        // TODO: To be replaced by dispatch function ADD_ONE
+        setPlaces((current) => [...current, selected]);
+    }
+
+    useEffect(() => {
+        const escapeHandler = event => {
+            if (event.key === "Escape") {
+                event.preventDefault();
+                setNearbyPlaces([]);
+            }
+        };
+        document.addEventListener('keydown', escapeHandler);
+
+        return () => {
+            document.removeEventListener('keydown', escapeHandler);
+        };
+    }, [])
+
+    // load data to show marker
+    useEffect(() => {
+        // TODO: To be replaced by dispatch function GET_ALL
+    }, []);
+
+    const zoomTo = ({ lat, lng }) => {
+        map.setCenter({ lat: lat, lng: lng });
+        map.setZoom(15);
+    };
+
+    const onPlaceChanged = () => {
+        const coords = autocomplete.getPlace().geometry.location.toJSON();
+        const request = {
+            location: coords,
+            radius: 1500,
+            types: ["park", "school", "campground"]
+        }
+        const service = new window.google.maps.places.PlacesService(map);
+        service.nearbySearch(request, ((result, status) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                setNearbyPlaces(result);
+                setPlace(result);
+            }
+        }))
+        zoomTo(coords);
+    };
+
+    const onLoadSearch = (autoC) => setAutocomplete(autoC);
+
+    const foundInCollection = (placeId) => {
+        for (const place of placeCollection) {
+            if (place.place_id === placeId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    return isLoaded ? (
+        <div>
+            <GoogleMap
+                mapContainerStyle={mapContainerStyle}
+                onLoad={onLoad}
+                onUnmount={onUnmount}
                 defaultCenter={center}
                 center={center}
                 defaultZoom={14.2}
                 options={{ disableDefaultUI: true, zoomControl: true, styles: MapStyles }}
-            />
-
+            >
+                <Autocomplete onLoad={onLoadSearch} onPlaceChanged={onPlaceChanged}>
+                    <div className={classes.search}>
+                        <div className={classes.searchIcon}>
+                            <Button onClick={onPlaceChanged}/>
+                        </div>
+                        <InputBase placeholder="Search…" classes={{ root: classes.inputRoot, input: classes.inputInput }}/>
+                    </div>
+                </Autocomplete>
+                {nearbyPlaces.map((nearby) => (
+                    <Marker
+                        key={nearby.place_id}
+                        position={{lat: nearby.geometry.location.lat(),
+                            lng: nearby.geometry.location.lng()}}
+                        onClick={() => {
+                            setSelected(nearby);
+                        }}/>
+                ))}
+                {placeCollection.map((turf) => (
+                    <Marker
+                        key={turf.place_id}
+                        position={{lat: turf.geometry.location.lat(),
+                            lng: turf.geometry.location.lng()}}
+                        onClick={() => {
+                            setSelected(turf);
+                        }}/>
+                ))}
+                {selected ? (
+                    <InfoWindow
+                        position={{
+                            lat: selected.geometry.location.lat(),
+                            lng: selected.geometry.location.lng(),
+                        }}
+                        onCloseClick={() => {
+                            setSelected(null);
+                        }}
+                    >
+                        <div>
+                            {selected.photos ? (
+                                <img src={selected.photos[0].getUrl({maxHeight: 250, maxWidth: 400})}
+                                     key={selected.place_id} alt={selected.place_id}/>
+                            ) : null}
+                            <h1>{selected.name}</h1>
+                            <p>{selected.formatted_address}</p>
+                            {foundInCollection(selected.place_id) ? (
+                                <LikeFilled
+                                    onClick={disLikeHandler}
+                                    className={classes.likeBtn}
+                                />
+                            ) : (
+                                <LikeOutlined
+                                    className={classes.likeBtn}
+                                    onClick={likeHandler}
+                                />
+                            )}
+                        </div>
+                    </InfoWindow>
+                ) : null}
+                <Locate zoomTo={zoomTo}/>
+            </GoogleMap>
+            {console.log(selected)}
         </div>
-    </div>
-  );
-};
+    ) : <></>
+}
 
-
-Map.propTypes = {};
-Map.defaultProps = {};
+function Locate({ zoomTo }) {
+    return (
+        <Button
+            className={classes.locate}
+            onClick={() => {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                            const lat = position.coords.latitude;
+                            const lng = position.coords.longitude;
+                        zoomTo({lat, lng});
+                    },
+                    () => null,
+                    null
+                );
+            }}
+        >
+        </Button>
+    );
+}
