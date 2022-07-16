@@ -6,7 +6,6 @@ import {LikeOutlined, LikeFilled} from "@ant-design/icons";
 import SearchIcon from '@material-ui/icons/Search';
 import NearMe from '@material-ui/icons/NearMe';
 import { InputBase } from '@material-ui/core';
-import "@reach/combobox/styles.css";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -26,6 +25,7 @@ function Map(callback, deps) {
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
         libraries: libraries
     })
+    const [nearbyPlaces, setNearbyPlaces] = useState([]);
 
     const [map, setMap] = useState(null)
 
@@ -49,6 +49,19 @@ function Map(callback, deps) {
         setPlaces((current) => [...current, selected]);
     }
 
+    useEffect(() => {
+        const escapeHandler = event => {
+            if (event.key === "Escape") {
+                event.preventDefault();
+                setNearbyPlaces([]);
+            }
+        };
+        document.addEventListener('keydown', escapeHandler);
+
+        return () => {
+            document.removeEventListener('keydown', escapeHandler);
+        };
+    }, [])
 
     // load data to show marker
     useEffect(() => {
@@ -57,15 +70,23 @@ function Map(callback, deps) {
 
     const zoomTo = ({ lat, lng }) => {
         map.setCenter({ lat: lat, lng: lng });
-        map.setZoom(12);
+        map.setZoom(15);
     };
 
     const onPlaceChanged = () => {
-        const place = autocomplete.getPlace();
-        const lat = autocomplete.getPlace().geometry.location.lat();
-        const lng = autocomplete.getPlace().geometry.location.lng();
-        setSelected(place);
-        zoomTo({lat, lng});
+        const coords = autocomplete.getPlace().geometry.location.toJSON();
+        const request = {
+            location: coords,
+            radius: 1500,
+            types: ["park", "school", "campground"]
+        }
+        const service = new window.google.maps.places.PlacesService(map);
+        service.nearbySearch(request, ((result, status) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                setNearbyPlaces(result);
+            }
+        }))
+        zoomTo(coords);
     };
 
     const onLoadSearch = (autoC) => setAutocomplete(autoC);
@@ -98,6 +119,15 @@ function Map(callback, deps) {
                         <InputBase placeholder="Search…" classes={{ root: classes.inputRoot, input: classes.inputInput }}/>
                     </div>
                 </Autocomplete>
+                {nearbyPlaces.map((nearby) => (
+                    <Marker
+                        key={nearby.place_id}
+                        position={{lat: nearby.geometry.location.lat(),
+                            lng: nearby.geometry.location.lng()}}
+                        onClick={() => {
+                            setSelected(nearby);
+                        }}/>
+                ))}
                 {placeCollection.map((turf) => (
                     <Marker
                         key={turf.place_id}
@@ -140,6 +170,7 @@ function Map(callback, deps) {
                 ) : null}
                 <Locate zoomTo={zoomTo}/>
             </GoogleMap>
+            {console.log(selected)}
         </div>
     ) : <></>
 }
