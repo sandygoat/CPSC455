@@ -1,0 +1,26 @@
+const initialState = {
+  authorizedUser:localStorage.getItem('authorizedUser') || null,
+  places:[],
+  favoriteList: [],
+  curReviews:[],
+  registrationPending: false,
+  registrationError: null,
+  loginPending: false,
+  loginError: null,
+  getPlacesPending: false,
+  getPlacesError: null,
+  getReviewsPending: false,
+  getReviewsError: null,
+  addReviewsPending: false,
+  addReviewsError: null,
+  deleteReviewPending: false,
+  deleteReviewError: null,
+  addFavoritePending: false,
+  addFavoriteError: null,
+  getFavoriteListPending: false,
+  getFavoriteListError: null,
+  removeFromFavoriteListPending: false,
+  removeFromFavoriteListError: null,
+};
+
+export default initialState;
