@@ -21,6 +21,12 @@ var cors = require('cors')
 
 var app = express();
 
+app.use(express.static(path.join(__dirname, 'front-end/build')))
+// Anything that doesn't match the above, send back index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/front-end/build/index.html'))
+})
+
 var corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
