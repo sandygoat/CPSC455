@@ -56,9 +56,7 @@ export default function Favorite({favorite}) {
   ) : (
     <div className="home-favorite">
       <Card
-        cover={
-          <img src={favorite.result.photos[0].getUrl({maxHeight: 250, maxWidth: 400})} alt={favorite.result.place_id}/>
-        }
+        
         actions={[
           <Button.Group>
             <Tooltip title={'Remove from favorites'} placement="topLeft">
