@@ -57,7 +57,7 @@ export default function Favorite({favorite}) {
     <div className="home-favorite">
       <Card
         cover={
-          <a href={favorite.result.photos && favorite.result.photos[0] && favorite.result.photos[0].html_attributions[0].split("\"")[1]}></a>
+          <img src={favorite.result.photos[0].getUrl({maxHeight: 250, maxWidth: 400})} alt={favorite.result.place_id}/>
         }
         actions={[
           <Button.Group>
@@ -74,6 +74,7 @@ export default function Favorite({favorite}) {
       >
         <Meta title={favorite.result.name} />
       </Card>
+      {console.log(favorite.result.photos[0].getUrl())}
     </div>
   );
 }
