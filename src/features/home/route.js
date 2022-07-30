@@ -1,4 +1,4 @@
-import { Home, Login, Favorite, Register } from './';
+import { Home, Login, FavoriteList, Register } from './';
 import { Redirect } from 'react-router-dom';
 import React from 'react';
 
@@ -15,6 +15,6 @@ export default {
     },
     { path: '/reg', component: Register },
     { path: '/login', component: Login },
-    { path: '/favorite', component: Favorite },
+    { path: '/favorite', component: FavoriteList },
   ],
 };

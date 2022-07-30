@@ -1,11 +1,16 @@
 import React, { useEffect } from 'react';
-import { Avatar, Comment ,Tooltip} from 'antd';
+import { Avatar, Comment ,Tooltip, Button} from 'antd';
 import moment from 'moment';
+import {useDeleteReview} from './redux/hooks';
 // import PropTypes from 'prop-types';
 
 
 export default function UserComment(p) {
+  const {deleteReview} = useDeleteReview()
   
+  const deleteComment = ()=>{
+    deleteReview(p)
+  }
 
   return (
     <div className="home-user-comment">
@@ -17,13 +22,17 @@ export default function UserComment(p) {
           p.text
         }
         datetime={
-        <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
-          <span>{moment().fromNow()}</span>
-        </Tooltip>
-      }
+          <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
+            <span>{moment().fromNow()}</span>
+          </Tooltip>
+        }
       >
         {p.children}
       </Comment>
+      {
+        p.currentUser == p.author_name?<Button type="dashed" danger onClick={deleteComment}>Delete</Button>:null
+        }
+      
     </div>
   );
 }

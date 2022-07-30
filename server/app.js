@@ -14,6 +14,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
 var placesRouter = require('./routes/places');
 var reviewsRouter = require('./routes/reviews');
+var favoriteRouter = require('./routes/favorite');
 const config = require('./config/config.js');
 var cors = require('cors')
 
@@ -81,6 +82,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/places', placesRouter);
+app.use('/favorite', favoriteRouter);
 
 
 mongoose

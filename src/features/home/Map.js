@@ -32,7 +32,8 @@ import React from 'react';
 import { Autocomplete, GoogleMap, InfoWindow, Marker, useJsApiLoader } from '@react-google-maps/api';
 import MapStyles from '../../styles/map.js';
 import classes from './Map.less';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, } from 'react';
+import { useSelector } from "react-redux";
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
 import { InputBase } from '@mui/material';
 // import SearchIcon from '@material-ui/icons/Search';
@@ -40,7 +41,7 @@ import { InputBase } from '@mui/material';
 // import { InputBase } from '@material-ui/core';
 // import "@reach/combobox/styles.css";
 import { Button } from 'antd';
-import { useSetPlaces } from './redux/hooks';
+import { useSetPlaces, useAddFavorite } from './redux/hooks';
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -56,6 +57,13 @@ export default function Map(callback, deps) {
     const [selected, setSelected] = useState(null);
     const [autocomplete, setAutocomplete] = useState(null);
     const { setPlace } = useSetPlaces();
+    const { addFavorite } = useAddFavorite();
+    const { authorizedUser } = useSelector(
+    state => ({
+      authorizedUser: state.home.authorizedUser,
+    })
+  );
+    
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
@@ -82,6 +90,7 @@ export default function Map(callback, deps) {
     }
     function likeHandler() {
         // TODO: To be replaced by dispatch function ADD_ONE
+        addFavorite({placeId:selected.place_id, userId:authorizedUser});
         setPlaces((current) => [...current, selected]);
     }
 

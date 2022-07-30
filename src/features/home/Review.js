@@ -10,12 +10,13 @@ const { TextArea } = Input;
 
 // import PropTypes from 'prop-types';
 
-const CommentList = ({ comments }) => (
+const CommentList = ({ comments, currentUser }) => (
   <List
     dataSource={comments}
     header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
     itemLayout="horizontal"
-    renderItem={(props) => <UserComment {...props} />}
+    
+    renderItem={(props) => <UserComment {...props} currentUser={currentUser}/>}
   />
 );
 
@@ -70,7 +71,7 @@ export default function Review({id}) {
   return (
     <div className="home-review">
       <>
-      {curReviews && curReviews.length > 0 && <CommentList comments={curReviews} />}
+      {curReviews && curReviews.length > 0 && <CommentList comments={curReviews} currentUser={authorizedUser}/>}
       <Comment
         avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
         content={

@@ -11,6 +11,7 @@ export { default as Favorite } from './Favorite';
 export { default as PlaceModal } from './PlaceModal';
 export { default as Review } from './Review';
 export { default as UserComment } from './UserComment';
+export { default as FavoriteList } from './FavoriteList';
 // export { default as YourFavourites } from './YourFavourites';
 // export { default as ThreeColumn } from './ThreeColumn';
 // export { default as FavouriteCard } from './FavouriteCard';

@@ -4,3 +4,7 @@ export { useGetPlaces } from './getPlaces';
 export { useGetReviews } from './getReviews';
 export { useAddReviews } from './addReviews';
 export { useSetPlaces } from './setPlaces';
+export { useDeleteReview } from './deleteReview';
+export { useAddFavorite } from './addFavorite';
+export { useGetFavoriteList } from './getFavoriteList';
+export { useRemoveFromFavoriteList } from './removeFromFavoriteList';
