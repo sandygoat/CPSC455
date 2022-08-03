@@ -1,3 +1,1 @@
-Search grass spots on Map a. Hookup Google Map display into react function b. Retrive geolocation information from GoogleMapAPIs
-
-Show ratings a. Create rating function in react b. Send and store data in MongoDB c. Setup endpoints to retrieve rating informat
+This application allows users to find a turf based on the rating of the turf and the distance from the location of the user to the turf. User is also able to view the image of the turf to see if it fits their preference.
