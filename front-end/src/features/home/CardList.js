@@ -79,7 +79,7 @@ function color16(){
             hexa={color16()}
             title={place.name}
             description={place.vicinity}
-            image={place.photos[0].getUrl({maxHeight: 250, maxWidth: 400})}
+            image={place && place.photos && place.photos[0] && place.photos[0].getUrl && place.photos[0].getUrl({maxHeight: 250, maxWidth: 400})}
           />
         ))}
       </Grid>

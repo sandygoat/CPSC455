@@ -9,11 +9,30 @@ const { Meta } = Card;
 // import PropTypes from 'prop-types';
 
 export default function Favorite({favorite}) {
+  const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [isClosed, setIsClosed] = useState(true);
   const {removeFromFavoriteList} = useRemoveFromFavoriteList();
   const [place, setPlace] = useState(null);
   const { authorizedUser} = useSelector(state => ({
     authorizedUser: state.home.authorizedUser,
   }));
+
+  const showModal = () => {
+    setVisible(true);
+    setIsClosed(false);
+  };
+
+  const handleOk = () => {
+    setLoading(true);
+    setLoading(false);
+    setVisible(false);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+    setIsClosed(true);
+  };
 
   // useEffect(()=>{
   //   if(favorite != null){
@@ -64,7 +83,7 @@ export default function Favorite({favorite}) {
                 <DeleteOutlined />
               </Button>
             </Tooltip>
-            <Button data-testid="detailsButton" type="default" onClick={openDetail}>
+            <Button data-testid="detailsButton" type="default" onClick={showModal}>
               <Icon type="profile" /> More details
             </Button>
           </Button.Group>
@@ -72,7 +91,17 @@ export default function Favorite({favorite}) {
       >
         <Meta title={favorite.result.name} />
       </Card>
-      {console.log(favorite.result.photos[0].getUrl())}
+      <>
+      {isClosed?null:<Modal
+        visible={visible}
+        title={favorite.result.name}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[]}
+      >
+        <div>this is detail</div>
+      </Modal>}
+      </>
     </div>
   );
 }

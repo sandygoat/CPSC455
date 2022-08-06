@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import UserComment from './UserComment';
-import { Avatar, Button, Comment, Form, Input, List } from 'antd';
+import { Avatar, Button, Comment, Form, Input, List, Rate, message } from 'antd';
 import moment from 'moment';
 import { useState } from 'react';
 import {useSelector} from 'react-redux';
@@ -35,6 +35,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 
 export default function Review({id}) {
   const [comments, setComments] = useState([]);
+  const [rate, setRate] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState('');
   const {addReviews, addReviewsPending} = useAddReviews()
@@ -48,6 +49,29 @@ export default function Review({id}) {
 
   useEffect(()=>{
     getReviews(id);
+    fetch(`/rating?placeId=${id}&userId=${authorizedUser}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: "include",
+      }
+    )
+    .then((r)=>{
+      if(r.ok){
+        return r.json();
+      }else{
+        throw new Error();
+      }
+    })
+    .then((r)=>{
+      if(r != null){
+        setRate(r.rating);
+      }
+    })
+    .catch((e)=>{
+      message.error('fail to load rating');
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
@@ -68,10 +92,42 @@ export default function Review({id}) {
     setValue(e.target.value);
   };
 
+  const setRating = (v) =>{
+    console.log(v);
+      fetch(`/rating`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: "include",
+        body:JSON.stringify({
+          placeId: id,
+          userId: authorizedUser,
+          rating: v,
+        })
+      }
+    )
+    .then((r)=>{
+      if(r.ok){
+        return r.json();
+      }else{
+        throw new Error();
+      }
+    })
+    .then((r)=>{
+      setRate(r[0].rating);
+      message.success("Rated");
+    })
+    .catch((e)=>{
+      message.error('fail to rate');
+    })
+  }
+
   return (
     <div className="home-review">
       <>
       {curReviews && curReviews.length > 0 && <CommentList comments={curReviews} currentUser={authorizedUser}/>}
+      
       <Comment
         avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
         content={
@@ -84,6 +140,8 @@ export default function Review({id}) {
         }
         author={authorizedUser}
       />
+      <div class="rateWrapper">Rate this place<Rate value={rate} onChange={(v) => setRating(v)}/></div>
+      
     </>
     </div>
   );

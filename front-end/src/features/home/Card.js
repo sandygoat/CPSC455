@@ -123,10 +123,8 @@ const Card = ({ id, hexa, title, description, image }) => {
 
   const handleOk = () => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setVisible(false);
-    }, 3000);
+    setLoading(false);
+    setVisible(false);
   };
 
   const handleCancel = () => {

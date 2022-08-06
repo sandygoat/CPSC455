@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import UserComment from './UserComment';
-import { Avatar, Button, Comment, Form, Input, List } from 'antd';
+import { Avatar, Button, Comment, Form, Input, List, Rate } from 'antd';
 import moment from 'moment';
 import { useState } from 'react';
 import {useSelector} from 'react-redux';
@@ -68,10 +68,15 @@ export default function Review({id}) {
     setValue(e.target.value);
   };
 
+  const setRating = () =>{
+
+  }
+
   return (
     <div className="home-review">
       <>
       {curReviews && curReviews.length > 0 && <CommentList comments={curReviews} currentUser={authorizedUser}/>}
+      <Rate />
       <Comment
         avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
         content={
@@ -84,6 +89,7 @@ export default function Review({id}) {
         }
         author={authorizedUser}
       />
+      
     </>
     </div>
   );

@@ -15,17 +15,18 @@ var usersRouter = require('./routes/user');
 var placesRouter = require('./routes/places');
 var reviewsRouter = require('./routes/reviews');
 var favoriteRouter = require('./routes/favorite');
+var ratingRouter = require('./routes/rating');
 const config = require('./config/config.js');
 var cors = require('cors')
 
 
 var app = express();
 
-app.use(express.static(path.join(__dirname, 'front-end/build')))
-// Anything that doesn't match the above, send back index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/front-end/build/index.html'))
-})
+// app.use(express.static(path.join(__dirname, 'front-end/build')))
+// // Anything that doesn't match the above, send back index.html
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname + '/front-end/build/index.html'))
+// })
 
 var corsOptions = {
   origin: 'http://localhost:3000',
@@ -88,6 +89,7 @@ app.use('/users', usersRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/places', placesRouter);
 app.use('/favorite', favoriteRouter);
+app.use('/rating', ratingRouter);
 
 
 mongoose
