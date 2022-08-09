@@ -58,7 +58,6 @@ const googleMaprequestor= (arrOfId, res) => {
             placeList.push(result);
         }
         Promise.all(placeList).then((places) => {
-            console.log(places)
             res.send(JSON.stringify(places));
         })
     })

@@ -404,6 +404,7 @@ module.exports = function(webpackEnv) {
               exclude: lessModuleRegex,
               use: getStyleLoaders(
                 {
+                  modules: true,
                   importLoaders: 2,
                   sourceMap: isEnvProduction && shouldUseSourceMap,
                 },

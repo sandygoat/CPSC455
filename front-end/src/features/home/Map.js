@@ -1,10 +1,10 @@
 import React from 'react';
 import { Autocomplete, GoogleMap, InfoWindow, Marker, useJsApiLoader } from '@react-google-maps/api';
 import MapStyles from '../../styles/map.js';
-import classes from './Map.less';
+import styles from './Map.less';
 import { useCallback, useEffect, useState, } from 'react';
 import { useSelector } from "react-redux";
-import { LikeOutlined, LikeFilled } from '@ant-design/icons';
+import { LikeOutlined, LikeFilled, SearchOutlined, UserOutlined } from '@ant-design/icons';
 import { InputBase } from '@mui/material';
 import { Button } from 'antd';
 import { useSetPlaces, useAddFavorite } from './redux/hooks';
@@ -124,11 +124,11 @@ export default function Map(callback, deps) {
                 options={{ disableDefaultUI: true, zoomControl: true, styles: MapStyles }}
             >
                 <Autocomplete onLoad={onLoadSearch} onPlaceChanged={onPlaceChanged}>
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <Button onClick={onPlaceChanged}/>
+                    <div className={styles.search}>
+                        <div className={styles.searchIcon}>
+                            <SearchOutlined onClick={onPlaceChanged}/>
                         </div>
-                        <InputBase placeholder="Search…" classes={{ root: classes.inputRoot, input: classes.inputInput }}/>
+                        <InputBase placeholder="Search…" classes={{ root: styles.inputRoot, input: styles.inputInput }}/>
                     </div>
                 </Autocomplete>
                 {nearbyPlaces.map((nearby) => (
@@ -169,11 +169,11 @@ export default function Map(callback, deps) {
                             {foundInCollection(selected.place_id) ? (
                                 <LikeFilled
                                     onClick={disLikeHandler}
-                                    className={classes.likeBtn}
+                                    className={styles.likeBtn}
                                 />
                             ) : (
                                 <LikeOutlined
-                                    className={classes.likeBtn}
+                                    className={styles.likeBtn}
                                     onClick={likeHandler}
                                 />
                             )}
@@ -182,15 +182,14 @@ export default function Map(callback, deps) {
                 ) : null}
                 <Locate zoomTo={zoomTo}/>
             </GoogleMap>
-            {console.log(selected)}
         </div>
     ) : <></>
 }
 
 function Locate({ zoomTo }) {
     return (
-        <Button
-            className={classes.locate}
+        <UserOutlined
+            className={styles.locate}
             onClick={() => {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -203,6 +202,6 @@ function Locate({ zoomTo }) {
                 );
             }}
         >
-        </Button>
+        </UserOutlined>
     );
 }
