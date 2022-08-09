@@ -5,8 +5,10 @@ import {
   PieChartOutlined,
   RadiusBottomrightOutlined,
 } from '@ant-design/icons';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from 'react';
+import { useSocket } from './context/socket';
+import { useDispatch, useSelector } from "react-redux";
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -15,10 +17,25 @@ const { SubMenu } = Menu;
 
 export default function HomeLayout(props) {
   const [collapsed, setCollapsed] = useState(false);
-
+  const socket = useSocket();
+  const { authorizedUser} = useSelector(state => ({
+    authorizedUser: state.home.authorizedUser,
+  }));
+  
   const onCollapse = () =>{
     setCollapsed(!collapsed);
   }
+
+  useEffect(() => {
+    // componentDidMount
+    if(authorizedUser){
+      socket.emit('login', authorizedUser); // 监听消息
+      return () => {
+        // componentWillUnmount
+        socket.emit('logout', authorizedUser);
+      };
+    }
+  }, [socket, authorizedUser]);
 
   return (
     <div className="home-home-layout">
@@ -31,6 +48,9 @@ export default function HomeLayout(props) {
               </Menu.Item>
               <Menu.Item key="favorite" icon={<DesktopOutlined />}>
                 <Link to="/favorite">Favorite</Link>
+              </Menu.Item>
+              <Menu.Item key="subscribe" icon={<DesktopOutlined />}>
+                <Link to="/subscribe">Subscribe</Link>
               </Menu.Item>
             </Menu>
           </Sider>

@@ -21,6 +21,9 @@ const initialState = {
   getFavoriteListError: null,
   removeFromFavoriteListPending: false,
   removeFromFavoriteListError: null,
+  getUsersPending: false,
+  getUsersError: null,
+  usersList: [],
 };
 
 export default initialState;

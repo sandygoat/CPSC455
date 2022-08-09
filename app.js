@@ -7,6 +7,9 @@ const mongoose = require('mongoose');
 const passport = require('passport');// 用户认证模块passport
 const Strategy = require('passport-http-bearer').Strategy;// token验证模块
 const session = require('express-session');
+
+
+
 // const redis = require('redis');
 // const connectRedis = require('connect-redis');
 
@@ -90,7 +93,6 @@ app.use('/reviews', reviewsRouter);
 app.use('/places', placesRouter);
 app.use('/favorite', favoriteRouter);
 app.use('/rating', ratingRouter);
-
 
 mongoose
 .connect(

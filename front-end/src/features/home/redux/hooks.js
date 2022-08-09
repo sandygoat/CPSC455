@@ -8,3 +8,4 @@ export { useDeleteReview } from './deleteReview';
 export { useAddFavorite } from './addFavorite';
 export { useGetFavoriteList } from './getFavoriteList';
 export { useRemoveFromFavoriteList } from './removeFromFavoriteList';
+export { useGetUsers } from './getUsers';

@@ -8,3 +8,4 @@ export { deleteReview, dismissDeleteReviewError } from './deleteReview';
 export { addFavorite, dismissAddFavoriteError } from './addFavorite';
 export { getFavoriteList, dismissGetFavoriteListError } from './getFavoriteList';
 export { removeFromFavoriteList, dismissRemoveFromFavoriteListError } from './removeFromFavoriteList';
+export { getUsers, dismissGetUsersError } from './getUsers';

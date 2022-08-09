@@ -150,7 +150,7 @@ const Card = ({ id, hexa, title, description, image }) => {
         onCancel={handleCancel}
         footer={[]}
       >
-        <Review id={id}></Review>
+        <Review id={id} title={title}></Review>
       </Modal>}
       </>
     </>

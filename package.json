@@ -7,6 +7,7 @@
     "heroku-postbuild": "cd front-end && npm install --force && npm run build"
   },
   "dependencies": {
+    "amqplib": "^0.10.2",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.15.2",
@@ -16,6 +17,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-session": "^1.17.3",
+    "http": "^0.0.1-security",
     "jsonwebtoken": "^7.1.9",
     "mongoose": "^6.4.0",
     "morgan": "~1.9.1",
@@ -23,6 +25,7 @@
     "passport": "^0.3.2",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
-    "redis": "^4.1.0"
+    "redis": "^4.1.0",
+    "socket.io": "^4.5.1"
   }
 }

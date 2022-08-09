@@ -5,6 +5,10 @@ const RatingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    placeName: {
+        type: String,
+        required: true
+    },
   placeId: {
     type: String,
     required: true

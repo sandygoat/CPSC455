@@ -9,6 +9,7 @@ import { reducer as deleteReviewReducer } from './deleteReview';
 import { reducer as addFavoriteReducer } from './addFavorite';
 import { reducer as getFavoriteListReducer } from './getFavoriteList';
 import { reducer as removeFromFavoriteListReducer } from './removeFromFavoriteList';
+import { reducer as getUsersReducer } from './getUsers';
 
 const reducers = [
   registrationReducer,
@@ -21,6 +22,7 @@ const reducers = [
   addFavoriteReducer,
   getFavoriteListReducer,
   removeFromFavoriteListReducer,
+  getUsersReducer,
 ];
 
 export default function reducer(state = initialState, action) {

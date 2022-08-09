@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Rating = require('../models/Rating');
+const Producer = require('../models/Producer');
+const producer = new Producer();
 
 
 router.get('/', function(req, res, next) {
@@ -27,6 +29,7 @@ router.post('/', function(req, res, next) {
                 console.log("save successfully");
                 Rating.find({userId, placeId})
                 .then((rating)=>{
+                    producer.publishMessage(JSON.stringify(rating[0]));
                     res.send(JSON.stringify(rating));
                 })
             })
@@ -41,3 +44,6 @@ router.post('/', function(req, res, next) {
 
 
 module.exports = router;
+
+
+//

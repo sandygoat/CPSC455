@@ -48,6 +48,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 // Load User model
 const User = require('../models/User');
+const Subscribe = require('../models/Subscribe');
 const { forwardAuthenticated } = require('../config/auth');
 
 // // Login Page
@@ -98,6 +99,37 @@ router.post('/register', (req, res) => {
     });
   }
 });
+
+router.get('/users', (req, res)=>{
+  const userId = req.query.userId;
+  User.find({name: {$ne:userId}})
+  .then((names)=>{
+      res.send(JSON.stringify(names));
+  })
+  .catch((e)=>{
+      console.log(e);
+  })
+})
+
+router.post('/subscribe',(req, res) =>{
+  const {userId, poster} = req.body;
+
+    const subscribe = new Subscribe({
+      subscriber:userId,
+      contentPoster:poster,
+    });
+    subscribe.save()
+    .then(()=>{
+        console.log("save successfully");
+        Subscribe.find({subscriber: userId})
+        .then((subscribers)=>{
+            res.send(JSON.stringify(subscribers));
+        })
+    })
+    .catch((e)=>{
+        console.log(e);
+    })
+})
 
 // Login
 router.post('/login' , (req, res, next) => {
