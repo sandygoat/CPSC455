@@ -14,6 +14,7 @@ const { Meta } = Card;
 // import PropTypes from 'prop-types';
 
 export default function Favorite({favorite}) {
+  const [photoUrl, setPhotoUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [isClosed, setIsClosed] = useState(true);
@@ -30,6 +31,21 @@ export default function Favorite({favorite}) {
   }));
   const directionHeader = "https://www.google.com/maps/dir/?api=1&";
 
+  // useEffect(() => {
+  //   const service = new window.google.maps.places.PlacesService(map);
+  //   service.getDetails(
+  //       {
+  //         placeId: favorite.result.geometry.location,
+  //         fields: ["photos"]
+  //       },
+  //       (result, status) => {
+  //         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+  //           setPhotoUrl(result.photos[0].getUrl({maxHeight: 250, maxWidth: 400}));
+  //         }
+  //       }
+  //   )
+  // }, [favorite, map])
+
   const getCurrentLocation = () => {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
@@ -40,23 +56,22 @@ export default function Favorite({favorite}) {
             resolve({lat: lat, lng: lng});
     }, (error) => {
             reject(error);
-          })})
+          })});
   }
 
   function getRoute(mode) {
     setIsRouteLoaded(false);
     getCurrentLocation().then((current) => {
       const origin = `origin=${current.lat},${current.lng}`;
-      const destination = `destination=${favorite.result.geometry.location.lat},${favorite.result.geometry.location.lng}`;
+      const destination = `destination=${favorite.geometry.location.lat},${favorite.geometry.location.lng}`;
       setLink(directionHeader + origin + "&" + destination);
       const directionService = new window.google.maps.DirectionsService();
       return directionService.route({
         origin: current,
-        destination: favorite.result.geometry.location,
+        destination: favorite.geometry.location,
         travelMode: mode
       })
     }).then((result) => {
-      console.log(result);
       setDirectionResponse(result);
       setDistance(result.routes[0].legs[0].distance.text);
       setDuration(result.routes[0].legs[0].duration.text);
@@ -93,45 +108,17 @@ export default function Favorite({favorite}) {
     setMap(null)
   }, [])
 
-  // useEffect(()=>{
-  //   if(favorite != null){
-  //     fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?place_id=${favorite.placeId}&key=AIzaSyA1h-RJmy66EAvQmxOOExargkvrdDRLlH4`, {
-  //     method: 'GET',
-
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Access-Control-Allow-Headers': 'X-Requested-With',
-  //       },
-  //     }
-  //   )
-  //   .then(res => {
-  //       if (res.ok) {
-  //         return res.json();
-  //       }
-  //       throw new Error(res.status);
-  //   })
-  //   .then(res=>{
-  //     setPlace(res);
-  //   })
-  //   .catch(err=>{
-  //     console.log(err);
-  //   })
-  // }},[favorite])
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
     libraries: libraries
-  })
+  });
 
   const removeFromFavorites = () =>{
     removeFromFavoriteList({
       userId: authorizedUser,
-      placeId: favorite.result.place_id,
+      placeId: favorite.placeId,
     })
-  }
-
-  const openDetail = () =>{
-    
   }
 
   return !authorizedUser ? (
@@ -139,7 +126,7 @@ export default function Favorite({favorite}) {
   ) : (
     <div className="home-favorite">
       <Card
-        
+        cover={<img alt={favorite.placeId} src={favorite.photoUrls.length ? favorite.photoUrls[0] : ""}/>}
         actions={[
           <Button.Group>
             <Tooltip title={'Remove from favorites'} placement="topLeft">
@@ -153,12 +140,12 @@ export default function Favorite({favorite}) {
           </Button.Group>
         ]}
       >
-        <Meta title={favorite.result.name} />
+        <Meta title={favorite.name} />
       </Card>
       <>
       {isClosed?null:<Modal
         visible={visible}
-        title={favorite.result.name}
+        title={favorite.name}
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[]}
@@ -188,12 +175,12 @@ export default function Favorite({favorite}) {
               mapContainerStyle={mapContainerStyle}
               onLoad={onLoad}
               onUnmount={onUnmount}
-              defaultCenter={favorite.result.geometry.location}
-              center={favorite.result.geometry.location}
+              defaultCenter={favorite.geometry.location}
+              center={favorite.geometry.location}
               defaultZoom={14.2}
               options={{disableDefaultUI: true, zoomControl: true}}
           >
-            {(isRouteLoaded) ? <></> : <Marker position={favorite.result.geometry.location}/>}
+            {(isRouteLoaded) ? <></> : <Marker position={favorite.geometry.location}/>}
             {(isRouteLoaded) ? <DirectionsRenderer directions={directionResponse}/> : <></>}
           </GoogleMap>
         </div>) : <></>}
