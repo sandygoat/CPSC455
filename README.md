@@ -9,27 +9,39 @@ Clear statement of goals (minimal, standard, stretch) and some indication of wha
 
 Minimal:
 
-1. Search: 
+1. :heavy_check_mark: Search: 
   - Find the turf or playland or anywhere green on Map that provides leisure activities.
-2. Comment: 
+2. :heavy_check_mark: Comment: 
   - Allow users to leave comments on a specific nearby location.
   - All users are able to read others' comments.
-3. Rate:
+  - Allow users to delete their comments
+3. :heavy_check_mark: Rate:
   - Allow individual user to rate the the turf and keep the record for future reference
+4. :heavy_check_mark: Favorite:
+  - Users are able to save/unsave places by clicking the favorite button
+5. :heavy_check_mark: Rating:
+  - Users can leave rating on particular place they have visited , which could be shared with other users later
+ 
+ 
 
 Standard:
 
-1. Filter results based on ratings
-2. Sort by distance from user
-3. Pictures:
-  - 
+1.  Filter results based on ratings
+2.  Sort by distance from user
+3. :heavy_check_mark: Pictures
+4. :heavy_check_mark: Trip Planner:
+  - In the favorite tab, users can directly find the route to the destination via the trip planner tool. In this tool, routes by multiple transportation tools can be provided as well as a link directly to the goole map with desinated route loaded.
 
 
 Advanced:
 
-1. Add friends
+1. :heavy_check_mark: Add friends[partially completed]:
+  - partially completed by the subscrib and notify feature, where subscribers will be updated by the latest ratings from their following users. 
 2. Create chatting/meetup function
 3. Third-party login
+4. :heavy_check_mark: Enable cookies
+5. :heavy_check_mark: Subscribe and Notify feature:
+  - Users can subscribe other users by searching their username in the Subscribe tab. Upon subcription, the subcribers will be notified by the new ratings made by the watched users.
 
 ==============================================================
 Description on how tech from Units 1-5 are used in the project. See rubric item #2 for a sense of what we’re looking for in this description. [2-3 sentences each]
