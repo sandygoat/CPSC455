@@ -94,13 +94,14 @@ Shuge Luo:
 
 Jack Hwang:
 - Implemented the initial front-end FavCard component and the Favorite page with pictures, location, comments, and star ratings. Generate documents and weekly scrum reports. 
+- Wrote documentation
 
 Fei Long:
 - Implemented initial front-end login page that included multiple fields for user info, login page layout, and captcha. Keep the communication flow between each group member.
+- Wrote documentation
 
 Sandy Wu:
 - Implemented the GoogleMap api and the extraction of all the relevant returned information. 
 - Implemented the search function on the home page, layout, pins on the map, pop up image on the the pin, and the like button that adds location to favorite list.
 - Implemented the trip planner function including travel options, current user location, and remove favorite from favorite list function. 
 - Co-Implemented the deployment on Heroku.
-
