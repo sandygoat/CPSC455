@@ -53,6 +53,20 @@ Description of usage explains in-depth how the technology has made the app bette
  - React: In the front end, React is used to create multiple reusable react components such as the FavoriteCards, PlaceModal, and UserComment. 
  - Redux: Redux is used to store and manage the states of the application in one place, such as addReviews, addFavorite, removeFromFavoriteList etc.
 
+### Unit 3 - MongoDB 
+ - Used MongoDB to store our key data components including places id, pictures, comments, ratings, favorite list, trip options within the trip planner, and the     suggestions made by other users. 
+ - As MongoDB is a non-relational, document oriented database management system, we were able to flexibly define the schema fitted our needs and access our data more speedily compared to the traditional RDBS. 
+
+### Unit 4 - Node & Express 
+ - Used Node.js to implement our backend services as well as the server-side logic. 
+ - Used Express to handle the API requests from our front-end and rout it to the specified handler function.
+ - Integrated Node.js and Express with our MongoDB with Mongoose for data storing and data manipulation.
+
+### Unit 5: Release Engineering
+ - Deployed and hosted rateMyTurf website on Heroku as it is beginner friendly and provides quick start up. 
+ - Used Heroku's automatic deploy from Github feature for better better maintainability to avoid potential build errors.
+
+
 ## Above and Beyond
 Description of ‘Above and Beyond’ functionality. Please give a clear description and in-depth explanation of how you went above and beyond the requirements of the course. This will help us awards marks for rubric item #4.
 
