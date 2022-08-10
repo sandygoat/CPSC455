@@ -7,7 +7,6 @@ This application allows users to find a turf based on the rating of the turf and
 
 ## Project Goals
 ### Minimal:
-
 1. :heavy_check_mark: Search: 
   - Find the turf or playland or anywhere green on Map that provides leisure activities.
 2. :heavy_check_mark: Comment: 
@@ -22,7 +21,6 @@ This application allows users to find a turf based on the rating of the turf and
   - Registeration for new users and log in system for returning users
  
 ### Standard:
-
 1.  Filter results based on ratings
 2.  Sort by distance from user [Amended]:
  - Initially, we planned to show the distance from the user's current location to the selected place. We improve this goal by introducing Trip Planner feature where users are able to get the route to the chosen place.  
@@ -32,7 +30,6 @@ This application allows users to find a turf based on the rating of the turf and
 5. :heavy_check_mark: Enable session cookies
 
 ### Advanced:
-
 1. :heavy_check_mark: Add friends[partially completed]:
   - Partially completed by the subscrib and notify feature, where subscribers will be updated by the latest ratings from their following users. 
 2. Create chatting/meetup function
@@ -40,10 +37,7 @@ This application allows users to find a turf based on the rating of the turf and
 4.  :heavy_check_mark: Subscribe and Notify feature:
   - Users can subscribe other users by searching their username in the Subscribe tab. Upon subcription, the subcribers will be notified by the new ratings made by the watched users.
 
-## Tech Stasck
-Description on how tech from Units 1-5 are used in the project. See rubric item #2 for a sense of what we’re looking for in this description. [2-3 sentences each]
-Description of usage explains in-depth how the technology has made the app better. Possibly a mention of how it compares to other similar tech. Documentation demonstrates a solid understanding of the tech learned throughout the term, and its purpose in creating a production-level full-stack web application.
-
+## Tech Stack
 ### Unit 1: HTML, CSS, JS
 - HTML is used within TSX to render React components.
 - CSS is used for styling.
@@ -66,15 +60,18 @@ Description of usage explains in-depth how the technology has made the app bette
  - Deployed and hosted rateMyTurf website on Heroku as it is beginner friendly and provides quick start up. 
  - Used Heroku's automatic deploy from Github feature for higher reliability and potentially fewer build errors.
 
-
 ## Above and Beyond
 Description of ‘Above and Beyond’ functionality. Please give a clear description and in-depth explanation of how you went above and beyond the requirements of the course. This will help us awards marks for rubric item #4.
 
 Project goes beyond the basic requirements by incorporating one to a few “extra” requirements. Some examples could be: Fully responsive, fully accessible, uses external APIs, implements a complex algorithm, utilizes ML/AI, did research for UX, supports multiple languages and/or timezones, uses location services, integrates with social media.
 
 ## Next Steps
-Description of Next Steps. What would you do next to further improve the app, or add additional relevant functionality? You may want to reference your in-progress or incomplete goals in this section. [2-3 sentences]
-Documentation clearly describes specific, relevant goals that would continue to improve upon the functionality or usability of the app. It is clear how this would be incorporated into the existing app.
+- Add more details on each place card:
+  - a tag to indicate whehter this place is pet-friendly or not
+  - allow user to upload pictures in the comment section.
+  - Hours section to show the opening and closing time 
+- Enable Third-Party login: allows users to log in through third party account instead of creating new accounts
+- Add friend and chat: Enrich the social function of this app by allowing users to add other uers as friends and chat with thier friends.Currently, our subcribe and notify function has done part of this work by allowing users to follow other users' update on this app. By adding friend and chat function, we want to expand on the this system and build strong community connections among users.
 
 ## List of contributions
 Highlight areas where each team member contributed significantly. [2-3 sentences per team member]
