@@ -84,5 +84,21 @@ Tired of isolating at home? Try our app to find the perfect grass fields to hang
 - Add friends and chat: Enrich the social function of this app by allowing users to add other users as friends and chat with their friends. Currently, our subscribe and notify function has done part of this work by allowing users to follow other users' updates on this app. By adding friend and chat functions, we want to expand on this system and build strong community connections among users.
 
 ## List of contributions
-Highlight areas where each team member contributed significantly. [2-3 sentences per team member]
-It is very clear which team member worked on which parts of the application. The documentation describes at least one area/issue/technology where each team member took a substantial leadership role, and that team member’s contribution is reflected in the project.
+Shuge Luo:
+- Implemented the Home list of location pictures, scrolling feature, the left three routing tabs on the left.
+- Implemented the final login page that allows user input, verification on successful registration and layout.
+- Implemented the session cookie in the backend and tested out using different user accounts.
+- Implemented the subscribe function using RabbitMD and Redis in the backend and tested the real time notfifcation.
+- Keep track of the entire project progress and facilitate the areas in need of technical assistance.
+
+Jack Hwang:
+- Implemented the initial front-end FavCard component and the Favorite page with pictures, location, comments, and star ratings. Generate documents and weekly scrum reports. 
+
+Fei Long:
+- Implemented initial front-end login page that included multiple fields for user info, login page layout, and captcha. Keep the communication flow between each group member.
+
+Sandy Wu:
+- Implemented the GoogleMap api and the extraction of all the relevant returned information. 
+- Implemented the search function on the home page, layout, pins on the map, pop up image on the the pin, and the like button that adds location to favorite list.
+- Implemented the trip planner function including different travel options and the location of current user.
+
