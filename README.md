@@ -46,6 +46,29 @@ This application allows users to find a turf based on the rating of the turf and
 Description on how tech from Units 1-5 are used in the project. See rubric item #2 for a sense of what we’re looking for in this description. [2-3 sentences each]
 Description of usage explains in-depth how the technology has made the app better. Possibly a mention of how it compares to other similar tech. Documentation demonstrates a solid understanding of the tech learned throughout the term, and its purpose in creating a production-level full-stack web application.
 
+Unit 1 - HTML, CSS, JS
+HTML is used within TSX to render React components.
+CSS is used for styling React components.
+JavaScript is used for implementing client-side and server-side logic, but for the frontend, we chose to use TypeScript instead to make the code easier to understand, to debug, and to take advantage of static checking.
+
+Unit 2 - React & Redux
+React is used to create components to build the frontend.
+Redux is used to store and organize the application’s state.
+Redux stores and manages the entire state of the application in one place, optimizing UI performance and React Redux makes it easy to get the two working together seamlessly.
+
+Unit 3 - MongoDB
+MongoDB is used to store the bulk of our data including songs, queues, default playlists, user profiles, and chat messages.
+Since MongoDB is a non-relational, document oriented database management system, it’s significantly faster and easier to use than a traditional database system. MongoDB Atlas also provides a simple and easy alternative to using the command line to access the database.
+
+Unit 4 - Node & Express
+Node.js is used for backend API services and server-side logic.
+Express provides server-side logic through routing, request handling, and endpoints.
+Node.js and Express easily integrate with MongoDB with Mongoose to provide a backend for our app.
+
+Unit 5 - Release Engineering
+Musico is deployed on Heroku with continuous integration enabled.
+Used Heroku’s student plan to deploy it on a Hobby Dyno for a more stable and reliable website experience
+
 ## Above and Beyond
 Description of ‘Above and Beyond’ functionality. Please give a clear description and in-depth explanation of how you went above and beyond the requirements of the course. This will help us awards marks for rubric item #4.
 
