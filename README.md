@@ -64,7 +64,7 @@ Description of usage explains in-depth how the technology has made the app bette
 
 ### Unit 5: Release Engineering
  - Deployed and hosted rateMyTurf website on Heroku as it is beginner friendly and provides quick start up. 
- - Used Heroku's automatic deploy from Github feature for better better maintainability to avoid potential build errors.
+ - Used Heroku's automatic deploy from Github feature for higher reliability and potentially fewer build errors.
 
 
 ## Above and Beyond
