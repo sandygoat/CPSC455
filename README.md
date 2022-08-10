@@ -61,9 +61,21 @@ This application allows users to find a turf based on the rating of the turf and
  - Used Heroku's automatic deploy from Github feature for higher reliability and potentially fewer build errors.
 
 ## Above and Beyond
-Description of ‘Above and Beyond’ functionality. Please give a clear description and in-depth explanation of how you went above and beyond the requirements of the course. This will help us awards marks for rubric item #4.
+- Google Map API
+  - Used Google to look up location, gather placeid, geolocation, pictures, and different transportation route options. 
+  - Enabled our users to search for the nearby grassfields given a rough location, see what the places look like, how to get there, and then make decision on     whether they would like to go there or not.
 
-Project goes beyond the basic requirements by incorporating one to a few “extra” requirements. Some examples could be: Fully responsive, fully accessible, uses external APIs, implements a complex algorithm, utilizes ML/AI, did research for UX, supports multiple languages and/or timezones, uses location services, integrates with social media.
+- Real time Responsive notification
+  - Used RabbitMQ and redis to manage asynchronous notification of the subscribee’s newly added rating to the subscriber.
+  - Allows the user to keep on using the app without having to wait for confirmation on whether subscriber has received the update.
+  - Once updated, user is able to see it immediately in their subcribed user list, which provides a real time responsive notification feature.
+
+
+Session cookie
+- Impemented session cookie in our backend. 
+  - User is able to login to the account and the backend will store their unique session ID. 
+  - No need to enter the login info again next time visiting the app since the browser is able to re-identify the user using the session ID from the server.
+
 
 ## Next Steps
 - Add more details on each place card:
