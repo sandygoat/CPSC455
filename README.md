@@ -88,7 +88,8 @@ Shuge Luo:
 - Implemented the Home list of location pictures, scrolling feature, the left three routing tabs on the left.
 - Implemented the final login page that allows user input, verification on successful registration and layout.
 - Implemented the session cookie in the backend and tested out using different user accounts.
-- Implemented the subscribe function using RabbitMD and Redis in the backend and tested the real time notfifcation.
+- Implemented the subscribe function using RabbitMD and Redis in the backend and tested the real time notfifcation by using differnt browserd to make ratings.
+- Co-Implemented the deployment on Heroku as well as degugging.
 - Keep track of the entire project progress and facilitate the areas in need of technical assistance.
 
 Jack Hwang:
@@ -100,5 +101,6 @@ Fei Long:
 Sandy Wu:
 - Implemented the GoogleMap api and the extraction of all the relevant returned information. 
 - Implemented the search function on the home page, layout, pins on the map, pop up image on the the pin, and the like button that adds location to favorite list.
-- Implemented the trip planner function including different travel options and the location of current user.
+- Implemented the trip planner function including different travel options, current user location, and the function of remove favorite from favorite list. 
+- Co-Implemented the deployment on Heroku.
 
