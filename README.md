@@ -88,7 +88,7 @@ Shuge Luo:
 - Implemented the Home list of location pictures, scrolling feature, the left three routing tabs on the left.
 - Implemented the final login page that allows user input, verification on successful registration and layout.
 - Implemented the session cookie in the backend and tested out using different user accounts.
-- Implemented the subscribe function using RabbitMD and Redis in the backend and tested the real time notfifcation by using differnt browserd to make ratings.
+- Implemented the subscribe function using RabbitMD and Redis in the backend and tested the real time notfifcation by using differnt browser to make ratings.
 - Co-Implemented the deployment on Heroku as well as degugging.
 - Keep track of the entire project progress and facilitate the areas in need of technical assistance.
 
