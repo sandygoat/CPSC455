@@ -47,14 +47,8 @@ Description on how tech from Units 1-5 are used in the project. See rubric item 
 Description of usage explains in-depth how the technology has made the app better. Possibly a mention of how it compares to other similar tech. Documentation demonstrates a solid understanding of the tech learned throughout the term, and its purpose in creating a production-level full-stack web application.
 
 Unit 1 - HTML, CSS, JS
-HTML is used within TSX to render React components.
-CSS is used for styling React components.
-JavaScript is used for implementing client-side and server-side logic, but for the frontend, we chose to use TypeScript instead to make the code easier to understand, to debug, and to take advantage of static checking.
 
 Unit 2 - React & Redux
-React is used to create components to build the frontend.
-Redux is used to store and organize the application’s state.
-Redux stores and manages the entire state of the application in one place, optimizing UI performance and React Redux makes it easy to get the two working together seamlessly.
 
 Unit 3 - MongoDB
 MongoDB is used to store the bulk of our data including songs, queues, default playlists, user profiles, and chat messages.
