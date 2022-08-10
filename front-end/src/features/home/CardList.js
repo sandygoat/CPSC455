@@ -72,7 +72,7 @@ function color16(){
   return (
     <Page>
       <Grid>
-        {places && places.slice(1,7).map((place, index) => (
+        {places && places.map((place, index) => (
           <Card
             key={place.place_id}
             id={place.place_id}

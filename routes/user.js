@@ -104,7 +104,20 @@ router.get('/users', (req, res)=>{
   const userId = req.query.userId;
   User.find({name: {$ne:userId}})
   .then((names)=>{
-      res.send(JSON.stringify(names));
+      Subscribe.find({subscriber: userId})
+      .then((subscribers)=>{
+          const temp = names.filter((name)=>{
+            return (name._doc.email !== userId) && !subscribers.some((sub)=>{
+              return sub._doc.contentPoster === name._doc.email
+            } )
+          })
+          res.send(JSON.stringify(temp));
+      })
+      .catch((e)=>{
+          console.log(e)
+      })
+      
+      
   })
   .catch((e)=>{
       console.log(e);

@@ -42,7 +42,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 var amqp = require('amqplib/callback_api');
 
 async function consumeMessage(){
-    amqp.connect('amqp://localhost',async (err, connection)=>{
+    try{
+        amqp.connect('amqp://localhost',async (err, connection)=>{
         const channel = await connection.createChannel();
         await channel.assertExchange('rating', 'fanout');
         channel.assertQueue('', {exclusive: true}, function(err, q) {
@@ -58,7 +59,7 @@ async function consumeMessage(){
                         redisClient.get(receiver._doc.subscriber,(err, socketId)=>{
                             if(!socketId) return;
                             io.sockets.sockets.get(socketId).emit('message', result);
-                            channel.ack(msg);
+                            // channel.ack(msg);
                         });
                     })
                 })
@@ -68,6 +69,9 @@ async function consumeMessage(){
             });
         });
     });
+    }catch(e){
+        console.log(e);
+    }
 }
 
 consumeMessage();

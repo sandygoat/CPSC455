@@ -54,6 +54,7 @@ export default function Subscribe() {
         throw new Error(res.status);
       })
       .then(res => {
+        message.success('Subscribed');
       })
     }else{
       message.error("Please select a user from dropdown")
