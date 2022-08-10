@@ -1,9 +1,7 @@
 # Rate the Turf
 
 ## App Description
-
-Top of README – clear description of app (can be like an elevator pitch!) [2-3 sentences]: !!! <br>
-This application allows users to find a turf based on the rating of the turf and the distance from the location of the user to the turf. User is also able to view the image of the turf to see if it fits their preference.
+Tired of isolating at home? Try our app to find the perfect grass fields to hang out with your friends. Our app also helps you plan the best route to the destination via various transportation tools. Besides, you will be updated by the accounts you are following. And many more for your discovery...
 
 ## Project Goals
 ### Minimal:
