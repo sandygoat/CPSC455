@@ -101,6 +101,6 @@ Fei Long:
 Sandy Wu:
 - Implemented the GoogleMap api and the extraction of all the relevant returned information. 
 - Implemented the search function on the home page, layout, pins on the map, pop up image on the the pin, and the like button that adds location to favorite list.
-- Implemented the trip planner function including different travel options, current user location, and the function of remove favorite from favorite list. 
+- Implemented the trip planner function including travel options, current user location, and remove favorite from favorite list function. 
 - Co-Implemented the deployment on Heroku.
 
