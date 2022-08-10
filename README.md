@@ -62,13 +62,13 @@ This application allows users to find a turf based on the rating of the turf and
 
 ## Above and Beyond
 - Google Map API
-  - Used Google to look up location, gather placeid, geolocation, pictures, and different transportation route options. 
+  - Used Google Map api to look up location, placeid, geolocation, pictures, and different transportation route options. 
   - Enabled our users to search for the nearby grassfields given a rough location, see what the places look like, how to get there, and then make decision on     whether they would like to go there or not.
 
 - Real time Responsive notification
   - Used RabbitMQ and redis to manage asynchronous notification of the subscribee’s newly added rating to the subscriber.
   - Allows the user to keep on using the app without having to wait for confirmation on whether subscriber has received the update.
-  - Once updated, user is able to see it immediately in their subcribed user list, which provides a real time responsive notification feature.
+  - Once updated, subscriber is able to see it immediately in their subcribed user list, which provides a real time responsive notification feature.
 
 
 - Session cookie
