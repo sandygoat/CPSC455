@@ -24,8 +24,9 @@ This application allows users to find a turf based on the rating of the turf and
 ### Standard:
 
 1.  Filter results based on ratings
-2.  Sort by distance from user
-3. :heavy_check_mark: Pictures
+2.  Sort by distance from user [Amended]:
+ - Initially, we planned to show the distance from the user's current location to the selected place. We improve this goal by introducing Trip Planner feature where users are able to get the route to the chosen place.  
+3. :heavy_check_mark: Add Pictures
 4. :heavy_check_mark: Trip Planner:
   - In the favorite tab, users can directly find the route to the destination via the trip planner tool. In this tool, routes by multiple transportation tools can be provided as well as a link directly to the goole map with desinated route loaded.
 5. :heavy_check_mark: Enable session cookies
@@ -50,7 +51,7 @@ Description of usage explains in-depth how the technology has made the app bette
 
 ### Unit 2: React & Redux
  - React: In the front end, React is used to create multiple reusable react components such as the FavoriteCards, PlaceModal, and UserComment. 
- - Redux: Redux is used to store and manage the entire state of the application in one place, such as addReviews, addFavorite, removeFromFavoriteList etc.
+ - Redux: Redux is used to store and manage the states of the application in one place, such as addReviews, addFavorite, removeFromFavoriteList etc.
 
 ## Above and Beyond
 Description of ‘Above and Beyond’ functionality. Please give a clear description and in-depth explanation of how you went above and beyond the requirements of the course. This will help us awards marks for rubric item #4.
@@ -62,5 +63,5 @@ Description of Next Steps. What would you do next to further improve the app, or
 Documentation clearly describes specific, relevant goals that would continue to improve upon the functionality or usability of the app. It is clear how this would be incorporated into the existing app.
 
 ## List of contributions
-. Highlight areas where each team member contributed significantly. [2-3 sentences per team member]
+Highlight areas where each team member contributed significantly. [2-3 sentences per team member]
 It is very clear which team member worked on which parts of the application. The documentation describes at least one area/issue/technology where each team member took a substantial leadership role, and that team member’s contribution is reflected in the project.
