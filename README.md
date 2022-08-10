@@ -71,8 +71,8 @@ This application allows users to find a turf based on the rating of the turf and
   - Once updated, user is able to see it immediately in their subcribed user list, which provides a real time responsive notification feature.
 
 
-Session cookie
-- Impemented session cookie in our backend. 
+- Session cookie
+  - Impemented session cookie in our backend. 
   - User is able to login to the account and the backend will store their unique session ID. 
   - No need to enter the login info again next time visiting the app since the browser is able to re-identify the user using the session ID from the server.
 
